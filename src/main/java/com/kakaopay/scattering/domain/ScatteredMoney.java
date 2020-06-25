@@ -1,8 +1,11 @@
 package com.kakaopay.scattering.domain;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Getter
 public class ScatteredMoney {
 
     private final BigDecimal money;
@@ -14,6 +17,10 @@ public class ScatteredMoney {
 
     public static ScatteredMoney of(BigDecimal money) {
         return new ScatteredMoney(money);
+    }
+
+    public static  ScatteredMoney of(double money) {
+        return new ScatteredMoney(BigDecimal.valueOf(money));
     }
 
     private void validate() {

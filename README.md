@@ -69,8 +69,9 @@
 - ReceiveHistory
     - [ ] 뿌려진 금액을 받은 내역을 관리한다.
 - MoneyDivider
-    - [ ] 금액을 n개의 작은 금액으로 나눈다.
-    - [ ] 나눠진 금액은 10원으로 나눠 떨어진다.
+    - [x] 금액을 n개의 작은 금액으로 나눈다.
+    - [x] 요청 분배 수와 나눠진 금액의 수량이 일치하지 않으면 MoneyCountNotMatchedException이 발생한다.
+    - [x] 요청 분배 금액과 나눠진 금액의 합이 일치하지 않으면 MoneySumNotMatchedException이 발생한다.
 - TokenGenerator
     - [ ] 고유 토큰을 생성한다.
 - Token
