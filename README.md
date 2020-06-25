@@ -57,6 +57,8 @@
     - [ ] 뿌리기 내역을 관리한다.
     - [ ] 나눠진 금액 중 아직 할당되지 않은 금액을 주어진 사용자에게 할당한다.
 - ScatteredMoney : 나눠진 금액
+    - [x] 금액이 0원 초과가 아니면 IllegalArgumentException이 발생한다.
+    - [x] 금액이 정수가 아니면 IllegalArgumentException이 발생한다.
     - [ ] 이미 할당된 금액을 또 할당하려고 하면 Exception이 발생한다.
 - Scatterer
     - [ ] 금액을 뿌린다.

@@ -9,10 +9,28 @@ public class ScatteredMoney {
 
     private ScatteredMoney(BigDecimal money) {
         this.money = money;
+        validate();
     }
 
     public static ScatteredMoney of(BigDecimal money) {
         return new ScatteredMoney(money);
+    }
+
+    private void validate() {
+        validateMoreThanZero();
+        validateInteger();
+    }
+
+    private void validateMoreThanZero() {
+        if (money.compareTo(BigDecimal.ZERO) < 1) {
+            throw new IllegalArgumentException("금액은 0원 초과이어야 합니다 : " + money);
+        }
+    }
+
+    private void validateInteger() {
+        if (money.stripTrailingZeros().scale() > 0) {
+            throw new IllegalArgumentException("금액은 정수이어야 합니다 : " + money);
+        }
     }
 
     @Override
