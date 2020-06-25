@@ -56,8 +56,7 @@
 - ScatterEvent
     - [ ] 뿌리기 내역을 관리한다.
     - [ ] 나눠진 금액 중 아직 할당되지 않은 금액을 주어진 사용자에게 할당한다.
-- ScatteredMoney
-    - [ ] 나눠진 금액 내역을 관리한다.
+- ScatteredMoney : 나눠진 금액
     - [ ] 이미 할당된 금액을 또 할당하려고 하면 Exception이 발생한다.
 - Scatterer
     - [ ] 금액을 뿌린다.
