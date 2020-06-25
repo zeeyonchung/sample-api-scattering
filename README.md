@@ -63,7 +63,7 @@
 - Scatterer
     - [x] 주어진 사용자와 같은 사용자인지 확인한다.
 - Receiver
-    - [ ] 이미 금액을 할당 받았으면 
+    - [ ] 이미 금액을 할당 받았는데 또 할당받으려고 하면 IllegalStateException이 발생한다.
     - [ ] 뿌려진 금액을 받는다.
     - [ ] Scatterer와 같은 사람이면 Exception이 발생한다.
 - ReceiveHistory
