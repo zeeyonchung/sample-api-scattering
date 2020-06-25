@@ -61,7 +61,7 @@
     - [x] 금액이 정수가 아니면 IllegalArgumentException이 발생한다.
     - [ ] 이미 할당된 금액을 또 할당하려고 하면 Exception이 발생한다.
 - Scatterer
-    - [ ] 금액을 뿌린다.
+    - [x] 주어진 사용자와 같은 사용자인지 확인한다.
 - Receiver
     - [ ] 이미 금액을 할당 받았으면 
     - [ ] 뿌려진 금액을 받는다.
