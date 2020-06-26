@@ -2,10 +2,12 @@ package com.kakaopay.scattering.domain;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
+@Getter
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
@@ -13,10 +15,10 @@ public class Token {
 
     static final int LENGTH = 3;
 
-    private String token;
+    private String value;
 
-    private Token(String token) {
-        this.token = token;
+    private Token(String value) {
+        this.value = value;
     }
 
     public static Token of(String token) {

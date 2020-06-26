@@ -13,9 +13,8 @@ public class ScattererTest {
     @CsvSource({"1, 1, true", "1, 2, false"})
     void isEqualMember(Long memberId, Long anotherMemberId, boolean expected) {
         Scatterer scatterer = new Scatterer(memberId);
+        Scatterer another = new Scatterer(anotherMemberId);
 
-        boolean isEqualMember = scatterer.isEqualMember(anotherMemberId);
-
-        assertThat(isEqualMember).isEqualTo(expected);
+        assertThat(scatterer.equals(another)).isEqualTo(expected);
     }
 }

@@ -11,6 +11,7 @@
 - Request
 ```
 POST /scatter
+Host: localhost:8080
 X-USER-ID: {member_id}
 X-ROOM-ID: {room_id}
 Content-Type: application/json

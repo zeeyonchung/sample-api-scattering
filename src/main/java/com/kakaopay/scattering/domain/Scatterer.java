@@ -1,11 +1,15 @@
 package com.kakaopay.scattering.domain;
 
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode
 @Embeddable
 public class Scatterer {
 
@@ -13,9 +17,5 @@ public class Scatterer {
 
     public Scatterer(Long memberId) {
         this.memberId = memberId;
-    }
-
-    public boolean isEqualMember(long memberId) {
-        return this.memberId == memberId;
     }
 }
