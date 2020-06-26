@@ -9,9 +9,33 @@
 ## API
 ### 뿌리기
 - Request
+```
+POST /scatter
+X-USER-ID: {member_id}
+X-ROOM-ID: {room_id}
+Content-Type: application/json
+```
+| Parametter | Description | Type |
+|---|:---:|---:|
+| `money` | 뿌릴 금액 | `number` |
+| `receiverCount` | 뿌릴 인원 | `number` |
+    
 - Success Response
+```
+HTTP/1.1 200 OK
+{
+    "token": "aB3"
+}
+```
+
 - Fail Response
-- Sample
+```
+HTTP/1.1 401 Unauthorized
+{
+    "code": 998,
+    "message": "Authentication token is missing or incorrect"
+}
+```
 
 ### 받기
 - Request
@@ -89,7 +113,3 @@
 - MoneyEvenDivideStrategy
     - [x] 금액을 n개의 작은 금액으로 나눈다.
     - [x] 딱 나눠떨어지지 않는 경우 나머지를 1씩 나눠줄 수 있는대로 나눠준다.
-
-## TODO
-- [ ] [TokenGenerator.java](src/main/java/com/kakaopay/scattering/domain/TokenGenerator.java)  
-랜덤하게 생성하려고 하지만 이미 발급된 토큰과 같은 토큰이 생성되어 `받으려는 유저` and `뿌리기 이벤트 토큰` 으로 조회할 때 여러개의 뿌리기 이벤트가 조회될 수 있다.
