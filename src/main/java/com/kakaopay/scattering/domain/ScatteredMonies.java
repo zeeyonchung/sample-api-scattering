@@ -1,12 +1,21 @@
 package com.kakaopay.scattering.domain;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.OneToMany;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Embeddable
 public class ScatteredMonies {
 
-    private final List<ScatteredMoney> monies;
+    @OneToMany(mappedBy = "scatterEvent", cascade = CascadeType.ALL)
+    private List<ScatteredMoney> monies;
 
     private ScatteredMonies(List<ScatteredMoney> monies) {
         this.monies = Collections.unmodifiableList(monies);

@@ -1,12 +1,18 @@
 package com.kakaopay.scattering.domain;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Embeddable
 public class Token {
 
     static final int LENGTH = 3;
 
-    private final String token;
+    private String token;
 
     private Token(String token) {
         this.token = token;

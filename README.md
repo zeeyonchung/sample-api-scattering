@@ -56,7 +56,7 @@
 ### domain
 - ScatterEvent
     - [ ] 뿌리기 내역을 관리한다.
-    - [ ] ScatteredMonies, Scatterer, Receiver를 함께 저장한다.
+    - [ ] ScatteredMonies, Receiver를 함께 저장한다.
     - [ ] 나눠진 금액 중 아직 할당되지 않은 금액을 주어진 사용자에게 할당한다.
 - ScatteredMoney : 나눠진 금액
     - [x] 금액이 0원 초과가 아니면 IllegalArgumentException이 발생한다.

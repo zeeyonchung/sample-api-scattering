@@ -1,15 +1,28 @@
 package com.kakaopay.scattering.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 public class ScatteredMoney {
 
-    public static final ScatteredMoney ZERO = new ScatteredMoney(0);
+    static final ScatteredMoney ZERO = new ScatteredMoney(0);
 
-    private final long money;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private long money;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "scatter_event_id")
+    private ScatterEvent scatterEvent;
 
     private ScatteredMoney(long money) {
         this.money = money;
