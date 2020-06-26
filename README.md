@@ -9,9 +9,34 @@
 ## API
 ### 뿌리기
 - Request
+```
+POST /scatter
+Host: localhost:8080
+X-USER-ID: {member_id}
+X-ROOM-ID: {room_id}
+Content-Type: application/json
+```
+| Parametter | Description | Type |
+|---|:---:|---:|
+| `money` | 뿌릴 금액 | `number` |
+| `receiverCount` | 뿌릴 인원 | `number` |
+    
 - Success Response
+```
+HTTP/1.1 200 OK
+{
+    "token": "aB3"
+}
+```
+
 - Fail Response
-- Sample
+```
+HTTP/1.1 400
+{
+    "status": 400,
+    "message": "Missing request header 'X-USER-ID' for method parameter of type String"
+}
+```
 
 ### 받기
 - Request
@@ -53,3 +78,46 @@
     - 뿌린 건에 대한 조회는 7일 동안 할 수 있습니다.
 
 ## 객체 설계
+### domain
+- ScatterEvent
+    - [x] 뿌리기 내역을 관리한다.
+    - [x] ScatteredMonies, Receiver를 함께 저장한다.
+    - [x] 나눠진 금액 중 아직 할당되지 않은 금액을 찾아 할당 처리한다.
+- ScatteredMoney : 나눠진 금액
+    - [x] 금액이 0원 초과가 아니면 IllegalArgumentException이 발생한다.
+    - [x] 금액이 정수가 아니면 IllegalArgumentException이 발생한다.
+    - [x] 다른 나눠진 금액과의 합을 구한다.
+    - [x] 이미 할당된 금액을 또 할당하려고 하면 IllegalStateException이 발생한다.
+- ScatteredMonies : 나눠진 금액 목록
+    - [x] 목록의 금액들의 총합을 구한다.
+- Scatterer
+    - [x] 주어진 사용자와 같은 사용자인지 확인한다.
+- ReceiveHistory
+    - [ ] 뿌려진 금액을 받은 내역을 관리한다.
+- MoneyDivider
+    - [x] 인원 수보다 작은 금액이면 IllegalArgumentException이 발생한다.
+    - [x] 금액을 n개의 작은 금액으로 나눈다.
+    - [x] 요청 분배 수와 나눠진 금액의 수량이 일치하지 않으면 MoneyCountNotMatchedException이 발생한다.
+    - [x] 요청 분배 금액과 나눠진 금액의 합이 일치하지 않으면 MoneySumNotMatchedException이 발생한다.
+- TokenGenerator
+    - [x] 토큰을 생성한다.
+    - [ ] 생성된 토큰은 고유한 값이다.
+- Token
+    - [x] 3자리 문자열이다.
+    - [x] 주어진 토큰과 일치하는지 확인한다.
+### application
+- ScatterMoneyService
+    - [x] 뿌리기 이벤트를 생성하고, 생성된 뿌리기 이벤트를 저장한다.
+    - [x] 뿌리기 이벤트의 토큰을 리턴한다.
+### web
+- ScatterMoneyController
+    - [x] 뿌리기 이벤트의 토큰을 리턴한다.
+    - [x] X-USER-ID 헤더가 없는 경우 BadRequestException이 발생한다.
+    - [x] X-ROOM-ID 헤더가 없는 경우 BadRequestException이 발생한다.
+- RestErrorResponseHandler
+    - [x] RestController 에러를 같은 형식으로 응답한다.
+### infra
+#### domain
+- MoneyEvenDivideStrategy
+    - [x] 금액을 n개의 작은 금액으로 나눈다.
+    - [x] 딱 나눠떨어지지 않는 경우 나머지를 1씩 나눠줄 수 있는대로 나눠준다.
