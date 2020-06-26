@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Getter
@@ -15,6 +16,7 @@ public class Token {
 
     static final int LENGTH = 3;
 
+    @Column(name = "token")
     private String value;
 
     private Token(String value) {

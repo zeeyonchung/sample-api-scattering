@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Getter
@@ -13,6 +14,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Scatterer {
 
+    @Column(name = "scatterer_id")
     private Long userId;
 
     public Scatterer(Long userId) {
