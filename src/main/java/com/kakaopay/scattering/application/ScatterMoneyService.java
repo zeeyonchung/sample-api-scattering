@@ -17,7 +17,7 @@ public class ScatterMoneyService {
     @Transactional
     public Token scatter(ScatterRequest request) {
         Token token = tokenGenerator.generate();
-        Scatterer scatterer = request.getScatterer();
+        Scatterer scatterer = new Scatterer(request.getUserId());
         ScatteredMonies scatteredMonies = moneyDivider.divide(request.getMoney(), request.getReceiverCount());
 
         ScatterEvent scatterEvent = ScatterEvent.builder()

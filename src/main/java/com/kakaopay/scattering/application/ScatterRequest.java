@@ -1,6 +1,5 @@
 package com.kakaopay.scattering.application;
 
-import com.kakaopay.scattering.domain.Scatterer;
 import lombok.*;
 
 @Getter
@@ -12,8 +11,11 @@ public class ScatterRequest {
 
     private long money;
     private int receiverCount;
+    private Long userId;
+    private String roomId;
 
-    @Setter
-    private Scatterer scatterer;
-
+    public void setUserIdAndRoomId(Long userId, String roomId) {
+        this.userId = userId;
+        this.roomId = roomId;
+    }
 }

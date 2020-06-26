@@ -29,12 +29,12 @@ public class ScatterMoneyServiceTest {
     void scatter_save() {
         ScatterRequest request = ScatterRequest.builder()
                 .money(1000L)
-                .scatterer(new Scatterer(500L))
+                .userId(500L)
                 .receiverCount(3)
                 .build();
 
         Token token = scatterMoneyService.scatter(request);
-        ScatterEvent saved = scatterEventRepo.findByTokenAndScatterer(token, request.getScatterer());
+        ScatterEvent saved = scatterEventRepo.findByTokenAndScatterer(token, new Scatterer(request.getUserId()));
 
         assertAll(
                 () -> assertThat(saved.getToken()).isEqualTo(token),

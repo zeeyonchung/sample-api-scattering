@@ -31,10 +31,10 @@ HTTP/1.1 200 OK
 
 - Fail Response
 ```
-HTTP/1.1 401 Unauthorized
+HTTP/1.1 400
 {
-    "code": 998,
-    "message": "Authentication token is missing or incorrect"
+    "status": 400,
+    "message": "Missing request header 'X-USER-ID' for method parameter of type String"
 }
 ```
 
@@ -109,6 +109,13 @@ HTTP/1.1 401 Unauthorized
 - ScatterMoneyService
     - [x] 뿌리기 이벤트를 생성하고, 생성된 뿌리기 이벤트를 저장한다.
     - [x] 뿌리기 이벤트의 토큰을 리턴한다.
+### web
+- ScatterMoneyController
+    - [ ] 뿌리기 이벤트의 토큰을 리턴한다.
+    - [ ] X-USER-ID 헤더가 없는 경우 BadRequestException이 발생한다.
+    - [ ] X-ROOM-ID 헤더가 없는 경우 BadRequestException이 발생한다.
+- RestErrorResponseHandler
+    - [ ] RestController 에러를 같은 형식으로 응답한다.
 ### infra
 #### domain
 - MoneyEvenDivideStrategy

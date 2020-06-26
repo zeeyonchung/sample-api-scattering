@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -17,7 +18,11 @@ public class ScatterMoneyController {
     private final ScatterMoneyService scatterMoneyService;
 
     @PostMapping("/scatter")
-    public ResponseEntity<ScatterResponse> scatter(@RequestBody ScatterRequest request) {
+    public ResponseEntity<ScatterResponse> scatter(@RequestHeader("X-USER-ID") Long userId,
+                                                   @RequestHeader("X-ROOM-ID") String roomId,
+                                                   @RequestBody ScatterRequest request) {
+
+        request.setUserIdAndRoomId(userId, roomId);
         Token token = scatterMoneyService.scatter(request);
 
         ScatterResponse response = ScatterResponse.builder()
