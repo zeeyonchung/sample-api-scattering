@@ -2,14 +2,14 @@ package com.kakaopay.scattering.domain;
 
 import com.kakaopay.scattering.domain.exception.MoneyCountNotMatchedException;
 import com.kakaopay.scattering.domain.exception.MoneySumNotMatchedException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@RequiredArgsConstructor
+@Component
 public class MoneyDivider {
 
     private final MoneyDivideStrategy divideStrategy;
-
-    public MoneyDivider(MoneyDivideStrategy divideStrategy) {
-        this.divideStrategy = divideStrategy;
-    }
 
     public ScatteredMonies divide(long money, int count) {
         validateMinimumMoney(money, count);

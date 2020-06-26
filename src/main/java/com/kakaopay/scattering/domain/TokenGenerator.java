@@ -1,7 +1,10 @@
 package com.kakaopay.scattering.domain;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Random;
 
+@Component
 public class TokenGenerator {
 
     private static final String CANDIDATE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghizklmnopqrstuvwxyz1234567890";

@@ -56,7 +56,7 @@
 ### domain
 - ScatterEvent
     - [ ] 뿌리기 내역을 관리한다.
-    - [ ] ScatteredMonies, Receiver를 함께 저장한다.
+    - [x] ScatteredMonies, Receiver를 함께 저장한다.
     - [ ] 나눠진 금액 중 아직 할당되지 않은 금액을 주어진 사용자에게 할당한다.
 - ScatteredMoney : 나눠진 금액
     - [x] 금액이 0원 초과가 아니면 IllegalArgumentException이 발생한다.
@@ -84,6 +84,10 @@
 - Token
     - [x] 3자리 문자열이다.
     - [x] 주어진 토큰과 일치하는지 확인한다.
+### application
+- ScatterMoneyService
+    - [x] 뿌리기 이벤트를 생성하고, 생성된 뿌리기 이벤트를 저장한다.
+    - [x] 뿌리기 이벤트의 토큰을 리턴한다.
 ### infra
 #### domain
 - MoneyEvenDivideStrategy
