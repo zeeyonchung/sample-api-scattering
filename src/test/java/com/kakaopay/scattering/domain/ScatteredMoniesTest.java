@@ -19,6 +19,6 @@ public class ScatteredMoniesTest {
 
         ScatteredMoney sum = monies.sum();
 
-        assertThat(sum).isEqualTo(ScatteredMoney.of(6));
+        assertThat(sum.isEqualMoney(6)).isTrue();
     }
 }

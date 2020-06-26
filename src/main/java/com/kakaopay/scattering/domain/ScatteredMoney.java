@@ -1,15 +1,13 @@
 package com.kakaopay.scattering.domain;
 
 import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class ScatteredMoney {
+public class ScatteredMoney extends BaseTimeEntity {
 
     static final ScatteredMoney ZERO = new ScatteredMoney(0);
 

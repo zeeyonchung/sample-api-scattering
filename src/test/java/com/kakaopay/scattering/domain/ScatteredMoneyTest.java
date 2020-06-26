@@ -14,7 +14,7 @@ public class ScatteredMoneyTest {
     @Test
     void of() {
         ScatteredMoney scatteredMoney = ScatteredMoney.of(1000);
-        assertThat(scatteredMoney).isEqualTo(ScatteredMoney.of(1000));
+        assertThat(scatteredMoney.isEqualMoney(1000)).isTrue();
     }
 
     @DisplayName("금액이 0원 초과가 아니면 IllegalArgumentException이 발생한다")
@@ -35,7 +35,7 @@ public class ScatteredMoneyTest {
 
         ScatteredMoney sum = money1.sum(money2);
 
-        assertThat(sum).isEqualTo(ScatteredMoney.of(expected));
+        assertThat(sum.isEqualMoney(expected)).isTrue();
     }
 
     @DisplayName("할당 후엔 재할당이 불가능하다")

@@ -5,12 +5,9 @@ import com.kakaopay.scattering.domain.ScatteredMonies;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,30 +40,14 @@ public class MoneyEvenDivideStrategyTest {
 
     @DisplayName("금액을 균등하게 나눈다")
     @ParameterizedTest
-    @MethodSource("divideArguments")
-    void divide(long money, int count, ScatteredMonies expected) {
+    @CsvSource({"0, 389", "1, 389", "2, 389", "3, 388"})
+    void divide(int index, long expected) {
+        long money = 1555;
+        int count = 4;
+
         ScatteredMonies scatteredMonies = divideStrategy.divide(money, count);
-        assertThat(scatteredMonies).isEqualTo(expected);
-    }
+        List<ScatteredMoney> moneyList = scatteredMonies.getContent();
 
-    public static Stream<Arguments> divideArguments() {
-        long money1 = 1000;
-        int count1 = 3;
-        ScatteredMonies expected1 = ScatteredMonies.of(Arrays.asList(
-                ScatteredMoney.of(334),
-                ScatteredMoney.of(333),
-                ScatteredMoney.of(333)));
-
-        long money2 = 1555;
-        int count2 = 4;
-        ScatteredMonies expected2 = ScatteredMonies.of(Arrays.asList(
-                ScatteredMoney.of(389),
-                ScatteredMoney.of(389),
-                ScatteredMoney.of(389),
-                ScatteredMoney.of(388)));
-
-        return Stream.of(
-                Arguments.of(money1, count1, expected1),
-                Arguments.of(money2, count2, expected2));
+        assertThat(moneyList.get(index).isEqualMoney(expected)).isTrue();
     }
 }
