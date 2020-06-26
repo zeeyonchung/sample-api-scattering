@@ -5,8 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,18 +22,13 @@ public class ScatterEvent {
     private Scatterer scatterer;
     private ScatteredMonies scatteredMonies;
 
-    @OneToMany(mappedBy = "scatterEvent", cascade = CascadeType.ALL)
-    private List<Receiver> receivers;
-
     @Builder
     public ScatterEvent(Token token,
                         Scatterer scatterer,
-                        ScatteredMonies scatteredMonies,
-                        List<Receiver> receivers) {
+                        ScatteredMonies scatteredMonies) {
         this.token = token;
         this.scatterer = scatterer;
         this.scatteredMonies = scatteredMonies;
-        this.receivers = receivers;
     }
 }
 

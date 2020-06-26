@@ -1,13 +1,15 @@
 package com.kakaopay.scattering.application;
 
-import com.kakaopay.scattering.domain.*;
+import com.kakaopay.scattering.domain.ScatterEvent;
+import com.kakaopay.scattering.domain.ScatterEventRepo;
+import com.kakaopay.scattering.domain.Scatterer;
+import com.kakaopay.scattering.domain.Token;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -27,8 +29,8 @@ public class ScatterMoneyServiceTest {
     void scatter_save() {
         ScatterRequest request = ScatterRequest.builder()
                 .money(1000L)
-                .receivers(Arrays.asList(new Receiver(1L), new Receiver(2L), new Receiver(3L)))
                 .scatterer(new Scatterer(500L))
+                .receiverCount(3)
                 .build();
 
         Token token = scatterMoneyService.scatter(request);
@@ -36,7 +38,6 @@ public class ScatterMoneyServiceTest {
 
         assertAll(
                 () -> assertThat(saved.getToken()).isEqualTo(token),
-                () -> assertThat(saved.getScatteredMonies().size()).isEqualTo(3),
-                () -> assertThat(saved.getReceivers().size()).isEqualTo(3));
+                () -> assertThat(saved.getScatteredMonies().size()).isEqualTo(3));
     }
 }
