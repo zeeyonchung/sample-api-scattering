@@ -26,12 +26,16 @@ public class ScatteredMonies {
         return new ScatteredMonies(monies);
     }
 
+    public int size() {
+        return monies.size();
+    }
+
+    void setScatterEvent(ScatterEvent event) {
+        monies.forEach(m -> m.setScatterEvent(event));
+    }
+
     public ScatteredMoney sum() {
         return monies.stream()
                 .reduce(ScatteredMoney.ZERO, ScatteredMoney::sum);
-    }
-
-    public int size() {
-        return monies.size();
     }
 }

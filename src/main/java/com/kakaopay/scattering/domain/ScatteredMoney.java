@@ -14,7 +14,7 @@ public class ScatteredMoney {
     static final ScatteredMoney ZERO = new ScatteredMoney(0);
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private long money;
@@ -40,6 +40,10 @@ public class ScatteredMoney {
 
     public boolean isEqualMoney(long money) {
         return this.money == money;
+    }
+
+    void setScatterEvent(ScatterEvent event) {
+        this.scatterEvent = event;
     }
 
     public ScatteredMoney sum(ScatteredMoney anotherMoney) {
