@@ -19,4 +19,8 @@ public class ScatteredMonies {
         return monies.stream()
                 .reduce(ScatteredMoney.ZERO, ScatteredMoney::sum);
     }
+
+    public int size() {
+        return monies.size();
+    }
 }
