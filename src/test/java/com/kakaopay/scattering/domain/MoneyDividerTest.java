@@ -27,6 +27,18 @@ public class MoneyDividerTest {
         assertThat(scatteredMonies.size()).isEqualTo(count);
     }
 
+    @DisplayName("인원수보다 작은 금액이면 IllegalArgumentException")
+    @Test
+    void divide_moneyLessThenCount() {
+        int count = 30;
+        BigDecimal money = BigDecimal.valueOf(10);
+        MoneyDivider moneyDivider = new MoneyDivider((m, c) -> ScatteredMonies.of(Collections.emptyList()));
+
+        assertThatThrownBy(() -> moneyDivider.divide(money, count))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("금액은 인원 수보다 커야");
+    }
+
     @DisplayName("금액이 주어진 수량대로 나뉘지 않았으면 MoneyCountNotMatchedException")
     @Test
     void divide_countNotMatched() {

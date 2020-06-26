@@ -14,12 +14,21 @@ public class MoneyDivider {
     }
 
     public ScatteredMonies divide(BigDecimal money, int count) {
+        validateMinimumMoney(money, count);
+
         ScatteredMonies scatteredMonies = divideStrategy.divide(money, count);
-        validate(scatteredMonies, money, count);
+        validateResult(scatteredMonies, money, count);
+
         return scatteredMonies;
     }
 
-    private void validate(ScatteredMonies scatteredMonies, BigDecimal money, int count) {
+    private void validateMinimumMoney(BigDecimal money, int count) {
+        if (money.compareTo(BigDecimal.valueOf(count)) < 0) {
+            throw new IllegalArgumentException("금액은 인원 수보다 커야 합니다");
+        }
+    }
+
+    private void validateResult(ScatteredMonies scatteredMonies, BigDecimal money, int count) {
         validateCount(scatteredMonies, count);
         validateSum(scatteredMonies, money);
     }

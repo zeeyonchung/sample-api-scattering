@@ -53,6 +53,7 @@
     - 뿌린 건에 대한 조회는 7일 동안 할 수 있습니다.
 
 ## 객체 설계
+### domain
 - ScatterEvent
     - [ ] 뿌리기 내역을 관리한다.
     - [ ] 나눠진 금액 중 아직 할당되지 않은 금액을 주어진 사용자에게 할당한다.
@@ -72,6 +73,7 @@
 - ReceiveHistory
     - [ ] 뿌려진 금액을 받은 내역을 관리한다.
 - MoneyDivider
+    - [ ] 인원 수보다 작은 금액이면 IllegalArgumentException이 발생한다.
     - [x] 금액을 n개의 작은 금액으로 나눈다.
     - [x] 요청 분배 수와 나눠진 금액의 수량이 일치하지 않으면 MoneyCountNotMatchedException이 발생한다.
     - [x] 요청 분배 금액과 나눠진 금액의 합이 일치하지 않으면 MoneySumNotMatchedException이 발생한다.
