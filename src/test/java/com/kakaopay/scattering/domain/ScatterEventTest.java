@@ -13,12 +13,14 @@ public class ScatterEventTest {
     @Test
     void build() {
         Token token = Token.of("123");
+        String roomId = "room13";
         ScatteredMonies scatteredMonies = ScatteredMonies.of(Arrays.asList(
                 ScatteredMoney.of(1000), ScatteredMoney.of(1000), ScatteredMoney.of(1001)));
         Scatterer scatterer = new Scatterer(1L);
 
         assertThatCode(() -> ScatterEvent.builder()
                     .token(token)
+                    .roomId(roomId)
                     .scatteredMonies(scatteredMonies)
                     .scatterer(scatterer)
                     .build())

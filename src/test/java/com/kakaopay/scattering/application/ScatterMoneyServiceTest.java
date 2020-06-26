@@ -29,6 +29,7 @@ public class ScatterMoneyServiceTest {
     void scatter_save() {
         ScatterRequest request = ScatterRequest.builder()
                 .money(1000L)
+                .roomId("room")
                 .userId(500L)
                 .receiverCount(3)
                 .build();

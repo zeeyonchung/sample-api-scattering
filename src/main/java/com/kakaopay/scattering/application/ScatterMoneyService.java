@@ -17,11 +17,13 @@ public class ScatterMoneyService {
     @Transactional
     public Token scatter(ScatterRequest request) {
         Token token = tokenGenerator.generate();
+        String roomId = request.getRoomId();
         Scatterer scatterer = new Scatterer(request.getUserId());
         ScatteredMonies scatteredMonies = moneyDivider.divide(request.getMoney(), request.getReceiverCount());
 
         ScatterEvent scatterEvent = ScatterEvent.builder()
                 .token(token)
+                .roomId(roomId)
                 .scatterer(scatterer)
                 .scatteredMonies(scatteredMonies)
                 .build();
