@@ -8,36 +8,42 @@ import java.util.Objects;
 @Getter
 public class ScatteredMoney {
 
+    public static final ScatteredMoney ZERO = new ScatteredMoney(BigDecimal.ZERO);
+
     private final BigDecimal money;
 
     private ScatteredMoney(BigDecimal money) {
         this.money = money;
-        validate();
     }
 
     public static ScatteredMoney of(BigDecimal money) {
+        validate(money);
         return new ScatteredMoney(money);
     }
 
     public static  ScatteredMoney of(double money) {
-        return new ScatteredMoney(BigDecimal.valueOf(money));
+        return ScatteredMoney.of(BigDecimal.valueOf(money));
     }
 
-    private void validate() {
-        validateMoreThanZero();
-        validateInteger();
+    private static void validate(BigDecimal money) {
+        validateMoreThanZero(money);
+        validateInteger(money);
     }
 
-    private void validateMoreThanZero() {
-        if (money.compareTo(BigDecimal.ZERO) < 1) {
+    private static void validateMoreThanZero(BigDecimal money) {
+        if (money.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("금액은 0원 초과이어야 합니다 : " + money);
         }
     }
 
-    private void validateInteger() {
+    private static void validateInteger(BigDecimal money) {
         if (money.stripTrailingZeros().scale() > 0) {
             throw new IllegalArgumentException("금액은 정수이어야 합니다 : " + money);
         }
+    }
+
+    public ScatteredMoney sum(ScatteredMoney anotherMoney) {
+        return ScatteredMoney.of(money.add(anotherMoney.money));
     }
 
     @Override

@@ -59,7 +59,10 @@
 - ScatteredMoney : 나눠진 금액
     - [x] 금액이 0원 초과가 아니면 IllegalArgumentException이 발생한다.
     - [x] 금액이 정수가 아니면 IllegalArgumentException이 발생한다.
+    - [x] 다른 나눠진 금액과의 합을 구한다.
     - [ ] 이미 할당된 금액을 또 할당하려고 하면 Exception이 발생한다.
+- ScatteredMonies : 나눠진 금액 목록
+    - [x] 목록의 금액들의 총합을 구한다.
 - Scatterer
     - [x] 주어진 사용자와 같은 사용자인지 확인한다.
 - Receiver
