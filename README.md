@@ -40,15 +40,36 @@ HTTP/1.1 400
 
 ### 받기
 - Request
+```
+PATCH /scatter
+Host: localhost:8080
+X-USER-ID: {member_id}
+X-ROOM-ID: {room_id}
+Content-Type: application/json
+```
+| Parametter | Description | Type |
+|---|:---:|---:|
+| `token` | 뿌리기 시 발급된 토큰 | `string` |
 - Success Response
+```
+HTTP/1.1 200 OK
+{
+    "receivedMoney": 520
+}
+```
 - Fail Response
-- Sample
+```
+HTTP/1.1 400
+{
+    "status": 400,
+    "message": "Missing request header 'X-USER-ID' for method parameter of type String"
+}
+```
 
 ### 조회
 - Request
 - Success Response
 - Fail Response
-- Sample
 
 ---
 
@@ -83,6 +104,9 @@ HTTP/1.1 400
     - [x] 뿌리기 내역을 관리한다.
     - [x] ScatteredMonies, Receiver를 함께 저장한다.
     - [x] 나눠진 금액 중 아직 할당되지 않은 금액을 찾아 할당 처리한다.
+    - [x] 뿌린지 10분이 지나고 할당 요청되면 AlreadyFinishedException이 발생한다.
+    - [x] 대화방이 다르면 NotSameRoomException이 발생한다.
+    - [x] 뿌린 사람과 받으려는 사람이 같으면 SelfReceiveException이 발생한다.
 - ScatteredMoney : 나눠진 금액
     - [x] 금액이 0원 초과가 아니면 IllegalArgumentException이 발생한다.
     - [x] 금액이 정수가 아니면 IllegalArgumentException이 발생한다.
@@ -94,6 +118,8 @@ HTTP/1.1 400
     - [x] 주어진 사용자와 같은 사용자인지 확인한다.
 - ReceiveHistory
     - [ ] 뿌려진 금액을 받은 내역을 관리한다.
+- ReceiveHistories : 받은 내역 목록
+    - [ ] 받은 사용자가 또 받으려고 하면 AlreadyReceivedException이 발생한다.
 - MoneyDivider
     - [x] 인원 수보다 작은 금액이면 IllegalArgumentException이 발생한다.
     - [x] 금액을 n개의 작은 금액으로 나눈다.
