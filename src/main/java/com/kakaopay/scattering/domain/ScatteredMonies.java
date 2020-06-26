@@ -38,4 +38,12 @@ public class ScatteredMonies {
         return monies.stream()
                 .reduce(ScatteredMoney.ZERO, ScatteredMoney::sum);
     }
+
+    public Long assignOne() {
+        return monies.stream()
+                .filter(ScatteredMoney::canAssign)
+                .findFirst()
+                .map(ScatteredMoney::assign)
+                .orElseThrow(() -> new IllegalStateException("할당할 수 있는 금액이 없습니다"));
+    }
 }

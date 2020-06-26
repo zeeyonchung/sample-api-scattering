@@ -80,14 +80,14 @@ HTTP/1.1 400
 ## 객체 설계
 ### domain
 - ScatterEvent
-    - [ ] 뿌리기 내역을 관리한다.
+    - [x] 뿌리기 내역을 관리한다.
     - [x] ScatteredMonies, Receiver를 함께 저장한다.
-    - [ ] 나눠진 금액 중 아직 할당되지 않은 금액을 주어진 사용자에게 할당한다.
+    - [x] 나눠진 금액 중 아직 할당되지 않은 금액을 찾아 할당 처리한다.
 - ScatteredMoney : 나눠진 금액
     - [x] 금액이 0원 초과가 아니면 IllegalArgumentException이 발생한다.
     - [x] 금액이 정수가 아니면 IllegalArgumentException이 발생한다.
     - [x] 다른 나눠진 금액과의 합을 구한다.
-    - [ ] 이미 할당된 금액을 또 할당하려고 하면 Exception이 발생한다.
+    - [x] 이미 할당된 금액을 또 할당하려고 하면 IllegalStateException이 발생한다.
 - ScatteredMonies : 나눠진 금액 목록
     - [x] 목록의 금액들의 총합을 구한다.
 - Scatterer
@@ -111,11 +111,11 @@ HTTP/1.1 400
     - [x] 뿌리기 이벤트의 토큰을 리턴한다.
 ### web
 - ScatterMoneyController
-    - [ ] 뿌리기 이벤트의 토큰을 리턴한다.
-    - [ ] X-USER-ID 헤더가 없는 경우 BadRequestException이 발생한다.
-    - [ ] X-ROOM-ID 헤더가 없는 경우 BadRequestException이 발생한다.
+    - [x] 뿌리기 이벤트의 토큰을 리턴한다.
+    - [x] X-USER-ID 헤더가 없는 경우 BadRequestException이 발생한다.
+    - [x] X-ROOM-ID 헤더가 없는 경우 BadRequestException이 발생한다.
 - RestErrorResponseHandler
-    - [ ] RestController 에러를 같은 형식으로 응답한다.
+    - [x] RestController 에러를 같은 형식으로 응답한다.
 ### infra
 #### domain
 - MoneyEvenDivideStrategy

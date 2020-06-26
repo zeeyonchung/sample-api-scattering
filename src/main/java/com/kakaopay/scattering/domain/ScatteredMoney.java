@@ -23,6 +23,8 @@ public class ScatteredMoney {
     @JoinColumn(name = "scatter_event_id")
     private ScatterEvent scatterEvent;
 
+    private boolean assigned;
+
     private ScatteredMoney(long money) {
         this.money = money;
     }
@@ -48,5 +50,18 @@ public class ScatteredMoney {
 
     public ScatteredMoney sum(ScatteredMoney anotherMoney) {
         return ScatteredMoney.of(money + anotherMoney.money);
+    }
+
+    public Long assign() {
+        if (this.assigned) {
+            throw new IllegalStateException("이미 할당된 금액입니다 : " + id);
+        }
+
+        this.assigned = true;
+        return this.id;
+    }
+
+    public boolean canAssign() {
+        return !this.assigned;
     }
 }

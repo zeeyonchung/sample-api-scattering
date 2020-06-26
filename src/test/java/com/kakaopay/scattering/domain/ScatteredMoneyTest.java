@@ -37,4 +37,25 @@ public class ScatteredMoneyTest {
 
         assertThat(sum).isEqualTo(ScatteredMoney.of(expected));
     }
+
+    @DisplayName("할당 후엔 재할당이 불가능하다")
+    @Test
+    void canAssign() {
+        ScatteredMoney scatteredMoney = ScatteredMoney.of(1000);
+
+        scatteredMoney.assign();
+
+        assertThat(scatteredMoney.canAssign()).isFalse();
+    }
+
+    @DisplayName("할당 후에 재할당하려고 하면 IllegalStateException")
+    @Test
+    void assign_alreadyAssigned() {
+        ScatteredMoney scatteredMoney = ScatteredMoney.of(1000);
+        scatteredMoney.assign();
+
+        assertThatThrownBy(scatteredMoney::assign)
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("이미 할당");
+    }
 }
