@@ -1,6 +1,7 @@
 package com.kakaopay.scattering.domain;
 
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
@@ -8,8 +9,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
+@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public class ScatteredMonies {
@@ -32,18 +33,5 @@ public class ScatteredMonies {
 
     public int size() {
         return monies.size();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ScatteredMonies monies1 = (ScatteredMonies) o;
-        return Objects.equals(monies, monies1.monies);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(monies);
     }
 }

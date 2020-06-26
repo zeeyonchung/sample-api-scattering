@@ -1,13 +1,14 @@
 package com.kakaopay.scattering.domain;
 
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Getter
+@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class ScatteredMoney {
@@ -41,20 +42,5 @@ public class ScatteredMoney {
 
     public ScatteredMoney sum(ScatteredMoney anotherMoney) {
         return ScatteredMoney.of(money + anotherMoney.money);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        ScatteredMoney that = (ScatteredMoney) o;
-        return Objects.equals(money, that.money);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(money);
     }
 }
