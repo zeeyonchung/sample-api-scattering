@@ -2,12 +2,10 @@ package com.kakaopay.scattering.domain;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Getter
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -38,6 +36,10 @@ public class ScatteredMoney {
         if (money <= 0) {
             throw new IllegalArgumentException("금액은 0원 초과이어야 합니다 : " + money);
         }
+    }
+
+    public boolean isEqualMoney(long money) {
+        return this.money == money;
     }
 
     public ScatteredMoney sum(ScatteredMoney anotherMoney) {

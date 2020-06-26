@@ -38,7 +38,7 @@ public class MoneyEvenDivideStrategyTest {
         ScatteredMonies scatteredMonies = divideStrategy.divide(money, count);
         ScatteredMoney sum = scatteredMonies.sum();
 
-        assertThat(sum.getMoney()).isEqualTo(money);
+        assertThat(sum.isEqualMoney(money));
     }
 
     @DisplayName("금액을 균등하게 나눈다")

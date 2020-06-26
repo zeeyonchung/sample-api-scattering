@@ -38,9 +38,9 @@ public class MoneyDivider {
     }
 
     private void validateSum(ScatteredMonies scatteredMonies, long money) {
-        long sum = scatteredMonies.sum().getMoney();
+        ScatteredMoney sum = scatteredMonies.sum();
 
-        if (sum != money) {
+        if (!sum.isEqualMoney(money)) {
             throw new MoneySumNotMatchedException("요청 금액과 나눠진 금액의 합계가 일치하지 않습니다");
         }
     }

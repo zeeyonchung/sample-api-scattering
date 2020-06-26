@@ -62,7 +62,7 @@ public class MoneyDividerTest {
         ScatteredMonies scatteredMonies = moneyDivider.divide(money, count);
         ScatteredMoney sum = scatteredMonies.sum();
 
-        assertThat(sum.getMoney()).isEqualTo(money);
+        assertThat(sum.isEqualMoney(money));
     }
 
     @DisplayName("나눠진 금액의 합이 처음의 금액과 일치하지 않으면 MoneySumNotMatchedException")
