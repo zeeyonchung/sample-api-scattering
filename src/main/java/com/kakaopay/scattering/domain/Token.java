@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Token {
 
-    private static final int LENGTH = 3;
+    static final int LENGTH = 3;
 
     private final String token;
 
@@ -19,7 +19,7 @@ public class Token {
 
     private static void validate(String token) {
         if (token.length() != LENGTH) {
-            throw new IllegalArgumentException("토큰의 길이가 일치하지 않습니다");
+            throw new IllegalArgumentException("토큰의 길이가 일치하지 않습니다 : " + token.length());
         }
     }
 

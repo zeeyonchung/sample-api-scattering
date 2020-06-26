@@ -76,7 +76,12 @@
     - [x] 요청 분배 수와 나눠진 금액의 수량이 일치하지 않으면 MoneyCountNotMatchedException이 발생한다.
     - [x] 요청 분배 금액과 나눠진 금액의 합이 일치하지 않으면 MoneySumNotMatchedException이 발생한다.
 - TokenGenerator
-    - [ ] 고유 토큰을 생성한다.
+    - [x] 토큰을 생성한다.
+    - [ ] 생성된 토큰은 고유한 값이다.
 - Token
     - [x] 3자리 문자열이다.
     - [x] 주어진 토큰과 일치하는지 확인한다.
+
+## TODO
+- [ ] [TokenGenerator.java](src/main/java/com/kakaopay/scattering/domain/TokenGenerator.java)  
+랜덤하게 생성하려고 하지만 이미 발급된 토큰과 같은 토큰이 생성되어 `받으려는 유저` and `뿌리기 이벤트 토큰` 으로 조회할 때 여러개의 뿌리기 이벤트가 조회될 수 있다.
