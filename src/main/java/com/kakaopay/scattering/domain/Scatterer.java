@@ -13,9 +13,9 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Scatterer {
 
-    private Long memberId;
+    private Long userId;
 
-    public Scatterer(Long memberId) {
-        this.memberId = memberId;
+    public Scatterer(Long userId) {
+        this.userId = userId;
     }
 }
