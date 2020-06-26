@@ -73,7 +73,7 @@
 - ReceiveHistory
     - [ ] 뿌려진 금액을 받은 내역을 관리한다.
 - MoneyDivider
-    - [ ] 인원 수보다 작은 금액이면 IllegalArgumentException이 발생한다.
+    - [x] 인원 수보다 작은 금액이면 IllegalArgumentException이 발생한다.
     - [x] 금액을 n개의 작은 금액으로 나눈다.
     - [x] 요청 분배 수와 나눠진 금액의 수량이 일치하지 않으면 MoneyCountNotMatchedException이 발생한다.
     - [x] 요청 분배 금액과 나눠진 금액의 합이 일치하지 않으면 MoneySumNotMatchedException이 발생한다.
@@ -83,6 +83,11 @@
 - Token
     - [x] 3자리 문자열이다.
     - [x] 주어진 토큰과 일치하는지 확인한다.
+### infra
+#### domain
+- MoneyEvenDivideStrategy
+    - [x] 금액을 n개의 작은 금액으로 나눈다.
+    - [x] 딱 나눠떨어지지 않는 경우 나머지를 1씩 나눠줄 수 있는대로 나눠준다.
 
 ## TODO
 - [ ] [TokenGenerator.java](src/main/java/com/kakaopay/scattering/domain/TokenGenerator.java)  
