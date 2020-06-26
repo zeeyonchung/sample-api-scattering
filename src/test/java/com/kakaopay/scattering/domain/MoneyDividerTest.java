@@ -18,7 +18,7 @@ public class MoneyDividerTest {
     @Test
     void divide_count() {
         int count = 2;
-        BigDecimal money = BigDecimal.valueOf(1000);
+        long money = 1000;
         ScatteredMonies monies = ScatteredMonies.of(Arrays.asList(ScatteredMoney.of(400), ScatteredMoney.of(600)));
         MoneyDivider moneyDivider = new MoneyDivider((m, c) -> monies);
 
@@ -31,7 +31,7 @@ public class MoneyDividerTest {
     @Test
     void divide_moneyLessThenCount() {
         int count = 30;
-        BigDecimal money = BigDecimal.valueOf(10);
+        long money = 10;
         MoneyDivider moneyDivider = new MoneyDivider((m, c) -> ScatteredMonies.of(Collections.emptyList()));
 
         assertThatThrownBy(() -> moneyDivider.divide(money, count))
@@ -43,7 +43,7 @@ public class MoneyDividerTest {
     @Test
     void divide_countNotMatched() {
         int count = 2;
-        BigDecimal money = BigDecimal.valueOf(1000);
+        long money = 1000;
         ScatteredMonies monies = ScatteredMonies.of(Collections.singletonList(ScatteredMoney.of(1000)));
         MoneyDivider moneyDivider = new MoneyDivider((m, c) -> monies);
 
@@ -56,21 +56,21 @@ public class MoneyDividerTest {
     @Test
     void divide_sum() {
         int count = 2;
-        BigDecimal money = BigDecimal.valueOf(1000);
+        long money = 1000;
         ScatteredMonies monies = ScatteredMonies.of(Arrays.asList(ScatteredMoney.of(400), ScatteredMoney.of(600)));
         MoneyDivider moneyDivider = new MoneyDivider((m, c) -> monies);
 
         ScatteredMonies scatteredMonies = moneyDivider.divide(money, count);
         ScatteredMoney sum = scatteredMonies.sum();
 
-        assertThat(sum.getMoney().compareTo(money)).isEqualTo(0);
+        assertThat(sum.getMoney()).isEqualTo(money);
     }
 
     @DisplayName("나눠진 금액의 합이 처음의 금액과 일치하지 않으면 MoneySumNotMatchedException")
     @Test
     void divide_sumNotMatched() {
         int count = 2;
-        BigDecimal money = BigDecimal.valueOf(1000);
+        long money = 1000;
         ScatteredMonies monies = ScatteredMonies.of(Arrays.asList(ScatteredMoney.of(100), ScatteredMoney.of(200)));
         MoneyDivider moneyDivider = new MoneyDivider((m, c) -> monies);
 

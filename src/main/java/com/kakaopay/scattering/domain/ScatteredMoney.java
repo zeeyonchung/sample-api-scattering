@@ -2,48 +2,32 @@ package com.kakaopay.scattering.domain;
 
 import lombok.Getter;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 @Getter
 public class ScatteredMoney {
 
-    public static final ScatteredMoney ZERO = new ScatteredMoney(BigDecimal.ZERO);
+    public static final ScatteredMoney ZERO = new ScatteredMoney(0);
 
-    private final BigDecimal money;
+    private final long money;
 
-    private ScatteredMoney(BigDecimal money) {
+    private ScatteredMoney(long money) {
         this.money = money;
     }
 
-    public static ScatteredMoney of(BigDecimal money) {
+    public static ScatteredMoney of(long money) {
         validate(money);
         return new ScatteredMoney(money);
     }
 
-    public static  ScatteredMoney of(double money) {
-        return ScatteredMoney.of(BigDecimal.valueOf(money));
-    }
-
-    private static void validate(BigDecimal money) {
-        validateMoreThanZero(money);
-        validateInteger(money);
-    }
-
-    private static void validateMoreThanZero(BigDecimal money) {
-        if (money.compareTo(BigDecimal.ZERO) <= 0) {
+    private static void validate(long money) {
+        if (money <= 0) {
             throw new IllegalArgumentException("금액은 0원 초과이어야 합니다 : " + money);
         }
     }
 
-    private static void validateInteger(BigDecimal money) {
-        if (money.stripTrailingZeros().scale() > 0) {
-            throw new IllegalArgumentException("금액은 정수이어야 합니다 : " + money);
-        }
-    }
-
     public ScatteredMoney sum(ScatteredMoney anotherMoney) {
-        return ScatteredMoney.of(money.add(anotherMoney.money));
+        return ScatteredMoney.of(money + anotherMoney.money);
     }
 
     @Override

@@ -3,8 +3,6 @@ package com.kakaopay.scattering.domain;
 import com.kakaopay.scattering.domain.exception.MoneyCountNotMatchedException;
 import com.kakaopay.scattering.domain.exception.MoneySumNotMatchedException;
 
-import java.math.BigDecimal;
-
 public class MoneyDivider {
 
     private final MoneyDivideStrategy divideStrategy;
@@ -13,7 +11,7 @@ public class MoneyDivider {
         this.divideStrategy = divideStrategy;
     }
 
-    public ScatteredMonies divide(BigDecimal money, int count) {
+    public ScatteredMonies divide(long money, int count) {
         validateMinimumMoney(money, count);
 
         ScatteredMonies scatteredMonies = divideStrategy.divide(money, count);
@@ -22,13 +20,13 @@ public class MoneyDivider {
         return scatteredMonies;
     }
 
-    private void validateMinimumMoney(BigDecimal money, int count) {
-        if (money.compareTo(BigDecimal.valueOf(count)) < 0) {
+    private void validateMinimumMoney(long money, int count) {
+        if (money < count) {
             throw new IllegalArgumentException("금액은 인원 수보다 커야 합니다");
         }
     }
 
-    private void validateResult(ScatteredMonies scatteredMonies, BigDecimal money, int count) {
+    private void validateResult(ScatteredMonies scatteredMonies, long money, int count) {
         validateCount(scatteredMonies, count);
         validateSum(scatteredMonies, money);
     }
@@ -39,10 +37,10 @@ public class MoneyDivider {
         }
     }
 
-    private void validateSum(ScatteredMonies scatteredMonies, BigDecimal money) {
-        BigDecimal sum = scatteredMonies.sum().getMoney();
+    private void validateSum(ScatteredMonies scatteredMonies, long money) {
+        long sum = scatteredMonies.sum().getMoney();
 
-        if (sum.compareTo(money) != 0) {
+        if (sum != money) {
             throw new MoneySumNotMatchedException("요청 금액과 나눠진 금액의 합계가 일치하지 않습니다");
         }
     }
