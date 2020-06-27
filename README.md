@@ -165,6 +165,7 @@ HTTP/1.1 400
 - ScatterEventService
     - [x] 뿌리기 이벤트의 정보를 조회한다.
     - [x] 뿌린 사람이 조회하는 게 아니면 IllegalArgumentException이 발생한다.
+    - [x] 뿌리고 7일 이후에 조회하면 IllegalArgumentException이 발생한다.
 ### web
 - ScatterMoneyController
     - [x] 뿌리기 이벤트의 토큰을 리턴한다.
