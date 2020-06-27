@@ -1,10 +1,7 @@
 package com.kakaopay.scattering.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kakaopay.scattering.application.ReceiveMoneyService;
-import com.kakaopay.scattering.application.ReceiveRequest;
-import com.kakaopay.scattering.application.ScatterMoneyService;
-import com.kakaopay.scattering.application.ScatterRequest;
+import com.kakaopay.scattering.application.*;
 import com.kakaopay.scattering.domain.Token;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,9 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
+
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,6 +35,9 @@ public class ScatterMoneyControllerTest {
 
     @MockBean
     private ReceiveMoneyService receiveMoneyService;
+
+    @MockBean
+    private ScatterEventService scatterEventService;
 
     private String token;
     private Long userId;
@@ -125,5 +127,32 @@ public class ScatterMoneyControllerTest {
                 .content(objectMapper.writeValueAsString(successReceiveRequest)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.receivedMoney").value(500L));
+    }
+
+    @DisplayName("조회 성공")
+    @Test
+    void check_success() throws Exception {
+        ScatterEventDetailRequest eventDetailRequest = ScatterEventDetailRequest.builder()
+                .token(token)
+                .userId(userId)
+                .roomId(roomId)
+                .build();
+
+        ScatterEventDetail detail = ScatterEventDetail.builder()
+                .eventId(1L)
+                .createdDate(LocalDateTime.of(2020, 6, 1, 12, 10, 10))
+                .originalMoney(1000L)
+                .receivedMoneySum(100L)
+                .build();
+
+        given(scatterEventService.detail(eventDetailRequest))
+                .willReturn(detail);
+
+        mockMvc.perform(get("/scatter?token=" + token)
+                .header("X-USER-ID", userId)
+                .header("X-ROOM-ID", roomId))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.eventId").value(1L));
     }
 }

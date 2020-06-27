@@ -69,19 +69,19 @@ X-ROOM-ID: {room_id}
 ```
 HTTP/1.1 200 OK
 {
-    "id": 1,
+    "eventId": 1,
     "createdDate": "2020-06-01 11:17:15",
     "originalMoney": 10000,
     "receivedMoneySum": 3000,
     "receiveHistory": [
         {
             "createdDate": "2020-06-01 12:30:15",
-            "receiver_id": 1234,
+            "receiverId": 1234,
             "receivedMoney": 2000
         },
         {
             "createdDate": "2020-06-01 15:00:30",
-            "receiver_id": 4321,
+            "receiverId": 4321,
             "receivedMoney": 1000
         },
     ]

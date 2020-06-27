@@ -42,11 +42,17 @@ public class ScatteredMonies {
                 .reduce(ScatteredMoney.ZERO, ScatteredMoney::sum);
     }
 
+    public ScatteredMoney sumAssigned() {
+        return monies.stream()
+                .filter(ScatteredMoney::isAssigned)
+                .reduce(ScatteredMoney.ZERO, ScatteredMoney::sum);
+    }
+
     public ScatteredMoney assignOneTo(Long userId) {
         checkAlreadyReceived(userId);
 
         return monies.stream()
-                .filter(ScatteredMoney::canAssign)
+                .filter(m -> !m.isAssigned())
                 .findFirst()
                 .map(m -> m.assignTo(userId))
                 .orElseThrow(() -> new IllegalStateException("할당할 수 있는 금액이 없습니다"));
