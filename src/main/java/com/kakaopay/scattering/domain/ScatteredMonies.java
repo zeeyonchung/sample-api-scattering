@@ -41,7 +41,7 @@ public class ScatteredMonies {
                 .reduce(ScatteredMoney.ZERO, ScatteredMoney::sum);
     }
 
-    public Long assignOne() {
+    public ScatteredMoney assignOne() {
         return monies.stream()
                 .filter(ScatteredMoney::canAssign)
                 .findFirst()

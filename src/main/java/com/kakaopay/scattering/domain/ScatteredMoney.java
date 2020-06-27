@@ -1,10 +1,12 @@
 package com.kakaopay.scattering.domain;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class ScatteredMoney extends BaseTimeEntity {
@@ -50,13 +52,13 @@ public class ScatteredMoney extends BaseTimeEntity {
         return ScatteredMoney.of(money + anotherMoney.money);
     }
 
-    public Long assign() {
+    public ScatteredMoney assign() {
         if (this.assigned) {
             throw new IllegalStateException("이미 할당된 금액입니다 : " + id);
         }
 
         this.assigned = true;
-        return this.id;
+        return this;
     }
 
     public boolean canAssign() {

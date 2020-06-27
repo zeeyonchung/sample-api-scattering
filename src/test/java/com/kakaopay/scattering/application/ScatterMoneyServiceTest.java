@@ -2,7 +2,6 @@ package com.kakaopay.scattering.application;
 
 import com.kakaopay.scattering.domain.ScatterEvent;
 import com.kakaopay.scattering.domain.ScatterEventRepo;
-import com.kakaopay.scattering.domain.Scatterer;
 import com.kakaopay.scattering.domain.Token;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,7 @@ public class ScatterMoneyServiceTest {
                 .build();
 
         Token token = scatterMoneyService.scatter(request);
-        ScatterEvent saved = scatterEventRepo.findByTokenAndScatterer(token, new Scatterer(request.getUserId()));
+        ScatterEvent saved = scatterEventRepo.findByTokenAndRoomId(token, "room").get();
 
         assertAll(
                 () -> assertThat(saved.getToken()).isEqualTo(token),

@@ -53,7 +53,7 @@ public class ScatterEvent extends BaseTimeEntity {
         scatteredMonies.setScatterEvent(this);
     }
 
-    public Long assignOne(LocalDateTime now, String roomId, Long userId) {
+    public ScatteredMoney assignOne(LocalDateTime now, String roomId, Long userId) {
         validateAssignable(now, roomId, userId);
         return scatteredMonies.assignOne();
     }
