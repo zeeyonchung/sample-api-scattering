@@ -1,5 +1,6 @@
 package com.kakaopay.scattering.domain;
 
+import com.kakaopay.scattering.domain.exception.AlreadyReceivedException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -41,11 +42,20 @@ public class ScatteredMonies {
                 .reduce(ScatteredMoney.ZERO, ScatteredMoney::sum);
     }
 
-    public ScatteredMoney assignOne() {
+    public ScatteredMoney assignOneTo(Long userId) {
+        checkAlreadyReceived(userId);
+
         return monies.stream()
                 .filter(ScatteredMoney::canAssign)
                 .findFirst()
-                .map(ScatteredMoney::assign)
+                .map(m -> m.assignTo(userId))
                 .orElseThrow(() -> new IllegalStateException("할당할 수 있는 금액이 없습니다"));
+    }
+
+    private void checkAlreadyReceived(Long userId) {
+        monies.stream()
+                .filter(m -> m.isAssignedTo(userId))
+                .findAny()
+                .ifPresent(m -> {throw new AlreadyReceivedException("이미 금액을 받았습니다");});
     }
 }

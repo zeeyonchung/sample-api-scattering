@@ -85,7 +85,7 @@ public class ReceiveMoneyServiceTest {
         List<ScatteredMoney> moneyList = findEvent.getScatteredMonies().getContent();
 
         assertAll(
-                () -> assertThat(moneyList.get(0).isAssigned()).isTrue(),
-                () -> assertThat(moneyList.get(1).isAssigned()).isFalse());
+                () -> assertThat(moneyList.get(0).canAssign()).isFalse(),
+                () -> assertThat(moneyList.get(1).canAssign()).isTrue());
     }
 }

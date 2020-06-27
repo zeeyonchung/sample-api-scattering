@@ -114,12 +114,11 @@ HTTP/1.1 400
     - [x] 이미 할당된 금액을 또 할당하려고 하면 IllegalStateException이 발생한다.
 - ScatteredMonies : 나눠진 금액 목록
     - [x] 목록의 금액들의 총합을 구한다.
+    - [x] 이미 받은 유저가 또 받으려고 하면 AlreadyReceivedException이 발생한다.
 - Scatterer
     - [x] 주어진 사용자와 같은 사용자인지 확인한다.
 - ReceiveHistory
-    - [ ] 뿌려진 금액을 받은 내역을 관리한다.
-- ReceiveHistories : 받은 내역 목록
-    - [ ] 받은 사용자가 또 받으려고 하면 AlreadyReceivedException이 발생한다.
+    - [x] 뿌려진 금액을 받은 내역을 관리한다.
 - MoneyDivider
     - [x] 인원 수보다 작은 금액이면 IllegalArgumentException이 발생한다.
     - [x] 금액을 n개의 작은 금액으로 나눈다.
