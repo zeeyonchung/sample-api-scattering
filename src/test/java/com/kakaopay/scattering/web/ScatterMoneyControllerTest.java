@@ -72,7 +72,7 @@ public class ScatterMoneyControllerTest {
                 .andExpect(jsonPath("$.token").value(token));
     }
 
-    @DisplayName("X-USER-ID 헤더가 없으면 BadRequestException")
+    @DisplayName("X-USER-ID 헤더가 없으면 HttpStatus는 Bad Request")
     @Test
     void scatter_noUserIdHeader() throws Exception {
         ScatterRequest successScatterRequest = ScatterRequest.builder()
@@ -90,7 +90,7 @@ public class ScatterMoneyControllerTest {
                 .andExpect(jsonPath("$.status").value(HttpStatus.BAD_REQUEST.value()));
     }
 
-    @DisplayName("X-ROOM-ID 헤더가 없으면 BadRequestException")
+    @DisplayName("X-ROOM-ID 헤더가 없으면 HttpStatus는 Bad Request")
     @Test
     void scatter_noRoomIdHeader() throws Exception {
         ScatterRequest successScatterRequest = ScatterRequest.builder()

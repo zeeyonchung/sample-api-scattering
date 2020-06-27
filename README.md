@@ -70,17 +70,17 @@ X-ROOM-ID: {room_id}
 HTTP/1.1 200 OK
 {
     "eventId": 1,
-    "createdDate": "2020-06-01 11:17:15",
+    "createdDate": "2020-06-27T13:40:33.493",
     "originalMoney": 10000,
     "assignedMoneySum": 3000,
     "receiveHistory": [
         {
-            "createdDate": "2020-06-01 12:30:15",
+            "createdDate": "2020-06-27T13:40:55.136",
             "receiverId": 1234,
             "receivedMoney": 2000
         },
         {
-            "createdDate": "2020-06-01 15:00:30",
+            "createdDate": "2020-06-27T13:40:55.136",
             "receiverId": 4321,
             "receivedMoney": 1000
         },
@@ -159,11 +159,17 @@ HTTP/1.1 400
 - ScatterMoneyService
     - [x] 뿌리기 이벤트를 생성하고, 생성된 뿌리기 이벤트를 저장한다.
     - [x] 뿌리기 이벤트의 토큰을 리턴한다.
+- ReceiveMoneyService
+    - [x] 뿌리기 이벤트를 조회하여 금액을 할당한다.
+    - [x] 할당된 금액을 리턴한다.
+- ScatterEventService
+    - [x] 뿌리기 이벤트의 정보를 조회한다.
+    - [x] 뿌린 사람이 조회하는 게 아니면 IllegalArgumentException이 발생한다.
 ### web
 - ScatterMoneyController
     - [x] 뿌리기 이벤트의 토큰을 리턴한다.
-    - [x] X-USER-ID 헤더가 없는 경우 BadRequestException이 발생한다.
-    - [x] X-ROOM-ID 헤더가 없는 경우 BadRequestException이 발생한다.
+    - [x] X-USER-ID 헤더가 없는 경우 HttpStatus는 Bad Request
+    - [x] X-ROOM-ID 헤더가 없는 경우 HttpStatus는 Bad Request
 - RestErrorResponseHandler
     - [x] RestController 에러를 같은 형식으로 응답한다.
 ### infra
