@@ -3,6 +3,7 @@ package com.kakaopay.scattering.application;
 import com.kakaopay.scattering.domain.ScatterEvent;
 import com.kakaopay.scattering.domain.ScatterEventRepo;
 import com.kakaopay.scattering.domain.Token;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class ScatterMoneyServiceTest {
 
     @Autowired
     private ScatterEventRepo scatterEventRepo;
+
+    @BeforeEach
+    void setUp() {
+        scatterEventRepo.deleteAll();
+    }
 
     @Transactional
     @DisplayName("생성한 뿌리기 이벤트를 저장한다")

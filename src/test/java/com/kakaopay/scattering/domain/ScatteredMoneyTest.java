@@ -45,7 +45,7 @@ public class ScatteredMoneyTest {
 
         scatteredMoney.assignTo(1L);
 
-        assertThat(scatteredMoney.canAssign()).isFalse();
+        assertThat(scatteredMoney.isAssigned()).isTrue();
     }
 
     @DisplayName("할당 후에 재할당하려고 하면 IllegalStateException")

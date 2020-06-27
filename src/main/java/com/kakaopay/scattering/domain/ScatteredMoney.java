@@ -55,24 +55,20 @@ public class ScatteredMoney extends BaseTimeEntity {
     }
 
     public ScatteredMoney assignTo(Long userId) {
-        if (!canAssign()) {
+        if (isAssigned()) {
             throw new IllegalStateException("할당 불가능한 금액입니다");
         }
 
-        saveReceiveHistory(userId);
+        this.receiveHistory = new ReceiveHistory(new Receiver(userId));
         return this;
     }
 
-    private void saveReceiveHistory(Long userId) {
-        this.receiveHistory = new ReceiveHistory(new Receiver(userId));
-    }
-
-    public boolean canAssign() {
-        return this.receiveHistory == null;
+    public boolean isAssigned() {
+        return this.receiveHistory != null;
     }
 
     public boolean isAssignedTo(Long userId) {
-        if (this.receiveHistory == null) {
+        if (!isAssigned()) {
             return false;
         }
 

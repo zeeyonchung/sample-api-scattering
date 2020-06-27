@@ -1,21 +1,18 @@
 package com.kakaopay.scattering.web;
 
-import com.kakaopay.scattering.application.ScatterMoneyService;
-import com.kakaopay.scattering.application.ScatterRequest;
+import com.kakaopay.scattering.application.*;
 import com.kakaopay.scattering.domain.Token;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
 public class ScatterMoneyController {
 
     private final ScatterMoneyService scatterMoneyService;
+    private final ReceiveMoneyService receiveMoneyService;
+    private final ScatterEventService scatterEventService;
 
     @PostMapping("/scatter")
     public ResponseEntity<ScatterResponse> scatter(@RequestHeader("X-USER-ID") Long userId,
@@ -29,6 +26,31 @@ public class ScatterMoneyController {
                 .token(token.getValue())
                 .build();
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/scatter")
+    public ResponseEntity<ReceiveResponse> receive(@RequestHeader("X-USER-ID") Long userId,
+                                                   @RequestHeader("X-ROOM-ID") String roomId,
+                                                   @RequestBody ReceiveRequest request) {
+        request.setUserIdAndRoomId(userId, roomId);
+        long receivedMoney = receiveMoneyService.receive(request);
+
+        ReceiveResponse response = ReceiveResponse.builder()
+                .receivedMoney(receivedMoney)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/scatter")
+    public ResponseEntity<ScatterEventDetail> detail(@RequestHeader("X-USER-ID") Long userId,
+                                                     @RequestHeader("X-ROOM-ID") String roomId,
+                                                     @ModelAttribute ScatterEventDetailRequest request) {
+
+        request.setUserIdAndRoomId(userId, roomId);
+        ScatterEventDetail response = scatterEventService.detail(request);
+
+        return ResponseEntity.ok(response);
     }
 }
