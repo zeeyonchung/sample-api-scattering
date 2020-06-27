@@ -1,6 +1,7 @@
 package com.kakaopay.scattering.application;
 
 import com.kakaopay.scattering.domain.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class ReceiveMoneyServiceTest {
 
     @Autowired
     private ScatterEventRepo scatterEventRepo;
+
+    @BeforeEach
+    void setUp() {
+        scatterEventRepo.deleteAll();
+    }
 
     @DisplayName("할당된 금액을 리턴한다")
     @Test

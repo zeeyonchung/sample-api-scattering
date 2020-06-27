@@ -142,7 +142,7 @@ public class ScatterMoneyControllerTest {
                 .eventId(1L)
                 .createdDate(LocalDateTime.of(2020, 6, 1, 12, 10, 10))
                 .originalMoney(1000L)
-                .receivedMoneySum(100L)
+                .assignedMoneySum(100L)
                 .build();
 
         given(scatterEventService.detail(eventDetailRequest))

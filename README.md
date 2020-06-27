@@ -72,7 +72,7 @@ HTTP/1.1 200 OK
     "eventId": 1,
     "createdDate": "2020-06-01 11:17:15",
     "originalMoney": 10000,
-    "receivedMoneySum": 3000,
+    "assignedMoneySum": 3000,
     "receiveHistory": [
         {
             "createdDate": "2020-06-01 12:30:15",

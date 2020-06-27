@@ -23,19 +23,19 @@ public class ScatterEventDetail {
     private Long eventId;
     private LocalDateTime createdDate;
     private long originalMoney;
-    private long receivedMoneySum;
+    private long assignedMoneySum;
     private List<ReceiveHistoryDetail> receiveHistories;
 
     public static ScatterEventDetail create(ScatterEvent event) {
         ScatteredMonies monies = event.getScatteredMonies();
         long originalMoney = monies.sum().getMoney();
-        long receivedMoneySum = monies.sumAssigned().getMoney();
+        long assignedMoneySum = monies.sumAssigned().getMoney();
 
         ScatterEventDetail detail = new ScatterEventDetail();
         detail.eventId = event.getId();
         detail.createdDate = event.getCreatedDate();
         detail.originalMoney = originalMoney;
-        detail.receivedMoneySum = receivedMoneySum;
+        detail.assignedMoneySum = assignedMoneySum;
         detail.receiveHistories = createReceiveHistoryDetails(monies);
 
         return detail;
@@ -48,6 +48,7 @@ public class ScatterEventDetail {
                 .collect(toList());
     }
 
+    @Getter
     public static class ReceiveHistoryDetail {
         private LocalDateTime createdDate;
         private Long receiverId;
