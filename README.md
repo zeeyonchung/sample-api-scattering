@@ -3,7 +3,12 @@
 
 ## 실행하기
 ```
+# 프로젝트 경로
+./gradlew bootjar
 
+cd build/libs
+
+java -jar scattering-0.0.1-SNAPSHOT.jar
 ```
 
 ## API
@@ -29,15 +34,6 @@ HTTP/1.1 200 OK
 }
 ```
 
-- Fail Response
-```
-HTTP/1.1 400
-{
-    "status": 400,
-    "message": "Missing request header 'X-USER-ID' for method parameter of type String"
-}
-```
-
 ### 받기
 - Request
 ```
@@ -57,6 +53,41 @@ HTTP/1.1 200 OK
     "receivedMoney": 520
 }
 ```
+
+### 조회
+- Request
+```
+GET /scatter?token=xyz
+Host: localhost:8080
+X-USER-ID: {member_id}
+X-ROOM-ID: {room_id}
+```
+| Parametter | Description | Type |
+|---|:---:|---:|
+| `token` | 뿌리기 시 발급된 토큰 | `string` |
+- Success Response
+```
+HTTP/1.1 200 OK
+{
+    "id": 1,
+    "createdDate": "2020-06-01 11:17:15",
+    "originalMoney": 10000,
+    "receivedMoneySum": 3000,
+    "receiveHistory": [
+        {
+            "createdDate": "2020-06-01 12:30:15",
+            "receiver_id": 1234,
+            "receivedMoney": 2000
+        },
+        {
+            "createdDate": "2020-06-01 15:00:30",
+            "receiver_id": 4321,
+            "receivedMoney": 1000
+        },
+    ]
+}
+```
+---
 - Fail Response
 ```
 HTTP/1.1 400
@@ -65,12 +96,6 @@ HTTP/1.1 400
     "message": "Missing request header 'X-USER-ID' for method parameter of type String"
 }
 ```
-
-### 조회
-- Request
-- Success Response
-- Fail Response
-
 ---
 
 ## 용어 정의
