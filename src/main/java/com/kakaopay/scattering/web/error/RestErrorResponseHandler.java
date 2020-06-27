@@ -17,9 +17,14 @@ public class RestErrorResponseHandler {
         return getErrorResponseEntity(e, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    protected ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException e) {
+        return getErrorResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(MoneyAssignException.class)
     protected ResponseEntity<ErrorResponse> handleMoneyAssignException(MoneyAssignException e) {
-        return getErrorResponseEntity(e, HttpStatus.CONFLICT);
+        return getErrorResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private ResponseEntity<ErrorResponse> getErrorResponseEntity(Exception e, HttpStatus httpStatus) {
