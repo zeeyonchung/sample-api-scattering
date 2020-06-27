@@ -1,5 +1,6 @@
 package com.kakaopay.scattering.domain;
 
+import com.kakaopay.scattering.domain.exception.AlreadyAssignedException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -55,6 +56,6 @@ public class ScatteredMoneyTest {
         scatteredMoney.assignTo(1L);
 
         assertThatThrownBy(() -> scatteredMoney.assignTo(2L))
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(AlreadyAssignedException.class);
     }
 }

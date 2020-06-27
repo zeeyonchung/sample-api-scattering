@@ -1,5 +1,6 @@
 package com.kakaopay.scattering.domain;
 
+import com.kakaopay.scattering.domain.exception.AlreadyAssignedException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,7 +57,7 @@ public class ScatteredMoney extends BaseTimeEntity {
 
     public ScatteredMoney assignTo(Long userId) {
         if (isAssigned()) {
-            throw new IllegalStateException("할당 불가능한 금액입니다");
+            throw new AlreadyAssignedException("할당 불가능한 금액입니다");
         }
 
         this.receiveHistory = new ReceiveHistory(new Receiver(userId));
