@@ -43,7 +43,7 @@ public class ScatteredMoneyTest {
     void canAssign() {
         ScatteredMoney scatteredMoney = ScatteredMoney.of(1000);
 
-        scatteredMoney.assign();
+        scatteredMoney.assignTo(1L);
 
         assertThat(scatteredMoney.canAssign()).isFalse();
     }
@@ -52,10 +52,9 @@ public class ScatteredMoneyTest {
     @Test
     void assign_alreadyAssigned() {
         ScatteredMoney scatteredMoney = ScatteredMoney.of(1000);
-        scatteredMoney.assign();
+        scatteredMoney.assignTo(1L);
 
-        assertThatThrownBy(scatteredMoney::assign)
-                .isInstanceOf(IllegalStateException.class)
-                .hasMessageContaining("이미 할당");
+        assertThatThrownBy(() -> scatteredMoney.assignTo(2L))
+                .isInstanceOf(IllegalStateException.class);
     }
 }

@@ -1,10 +1,12 @@
 package com.kakaopay.scattering.domain;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class ScatteredMoney extends BaseTimeEntity {
@@ -21,7 +23,9 @@ public class ScatteredMoney extends BaseTimeEntity {
     @JoinColumn(name = "scatter_event_id")
     private ScatterEvent scatterEvent;
 
-    private boolean assigned;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "receive_history_id")
+    private ReceiveHistory receiveHistory;
 
     private ScatteredMoney(long money) {
         this.money = money;
@@ -50,16 +54,28 @@ public class ScatteredMoney extends BaseTimeEntity {
         return ScatteredMoney.of(money + anotherMoney.money);
     }
 
-    public Long assign() {
-        if (this.assigned) {
-            throw new IllegalStateException("이미 할당된 금액입니다 : " + id);
+    public ScatteredMoney assignTo(Long userId) {
+        if (!canAssign()) {
+            throw new IllegalStateException("할당 불가능한 금액입니다");
         }
 
-        this.assigned = true;
-        return this.id;
+        saveReceiveHistory(userId);
+        return this;
+    }
+
+    private void saveReceiveHistory(Long userId) {
+        this.receiveHistory = new ReceiveHistory(new Receiver(userId));
     }
 
     public boolean canAssign() {
-        return !this.assigned;
+        return this.receiveHistory == null;
+    }
+
+    public boolean isAssignedTo(Long userId) {
+        if (this.receiveHistory == null) {
+            return false;
+        }
+
+        return this.receiveHistory.isEqualReceiver(new Receiver(userId));
     }
 }
