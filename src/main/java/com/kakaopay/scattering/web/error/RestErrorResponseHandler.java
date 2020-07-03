@@ -13,6 +13,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class RestErrorResponseHandler {
 
+    @ExceptionHandler(RuntimeException.class)
+    protected ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
+        log.error(e.getClass().getSimpleName(), e);
+
+        HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        ErrorResponse response = ErrorResponse.of(httpStatus);
+
+        return new ResponseEntity<>(response, httpStatus);
+    }
+
     @ExceptionHandler(ServletRequestBindingException.class)
     protected ResponseEntity<ErrorResponse> handleServletRequestBindingException(ServletRequestBindingException e) {
         return getErrorResponseEntity(e, HttpStatus.BAD_REQUEST);
