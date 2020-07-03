@@ -1,15 +1,14 @@
 package com.kakaopay.scattering.web;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.kakaopay.scattering.domain.Token;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class ScatterResponse {
 
     private String token;
+
+    public ScatterResponse(Token token) {
+        this.token = token.getValue();
+    }
 }

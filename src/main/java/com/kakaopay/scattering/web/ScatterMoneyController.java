@@ -20,15 +20,9 @@ public class ScatterMoneyController {
     public ResponseEntity<ScatterResponse> scatter(@RequestHeader(HEADER_USER_ID) Long userId,
                                                    @RequestHeader(HEADER_ROOM_ID) String roomId,
                                                    @RequestBody ScatterRequest request) {
-
         request.setUserIdAndRoomId(userId, roomId);
         Token token = scatterMoneyService.scatter(request);
-
-        ScatterResponse response = ScatterResponse.builder()
-                .token(token.getValue())
-                .build();
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new ScatterResponse(token));
     }
 
     @PatchMapping("/scatter")
@@ -37,22 +31,15 @@ public class ScatterMoneyController {
                                                    @RequestBody ReceiveRequest request) {
         request.setUserIdAndRoomId(userId, roomId);
         long receivedMoney = receiveMoneyService.receive(request);
-
-        ReceiveResponse response = ReceiveResponse.builder()
-                .receivedMoney(receivedMoney)
-                .build();
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new ReceiveResponse(receivedMoney));
     }
 
     @GetMapping("/scatter")
     public ResponseEntity<ScatterEventDetail> detail(@RequestHeader(HEADER_USER_ID) Long userId,
                                                      @RequestHeader(HEADER_ROOM_ID) String roomId,
                                                      @ModelAttribute ScatterEventDetailRequest request) {
-
         request.setUserIdAndRoomId(userId, roomId);
         ScatterEventDetail response = scatterEventService.detail(request);
-
         return ResponseEntity.ok(response);
     }
 }
